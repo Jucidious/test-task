@@ -1,13 +1,7 @@
 package com.jucya.core.shared.data;
 
-import java.time.Instant;
-import java.time.temporal.TemporalAccessor;
-import java.util.Objects;
-
 /**
- * Describes a lead property metadata.
- *
- * @since 0.5
+ * Describes a criteria property.
  */
 public class CriteriaData {
 
@@ -19,8 +13,8 @@ public class CriteriaData {
     }
 
     CriteriaData(String name, Object value) {
-        this.name = Objects.requireNonNull(name);
-        this.value = Objects.requireNonNull(value);
+        this.name = name;
+        this.value = value;
     }
 
     public String getName() {
@@ -30,16 +24,5 @@ public class CriteriaData {
     public Object getValue() {
         return value;
     }
-
-    /**
-     * Converts, if it requires, the property
-     * value to string representation.
-     *
-     * @return property value as a string
-     */
-    public String asString() {
-        return value.toString();
-    }
-
 
 }

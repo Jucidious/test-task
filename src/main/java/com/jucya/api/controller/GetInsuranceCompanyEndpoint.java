@@ -1,17 +1,21 @@
 package com.jucya.api.controller;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.jucya.core.shared.data.CriteriaEnumData;
 import com.jucya.core.shared.data.CriteriaData;
 import com.jucya.core.usecase.GetInsuranceCompanyCase;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-import java.util.stream.Collectors;
-
+/**
+ * Endpoint to get company information.
+ */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/search")
 public class GetInsuranceCompanyEndpoint {
 
     private final GetInsuranceCompanyCase getInsuranceCompanyCase;
@@ -20,6 +24,11 @@ public class GetInsuranceCompanyEndpoint {
         this.getInsuranceCompanyCase = getInsuranceCompanyCase;
     }
 
+    /**
+     * Gets company information.
+     *
+     * @return list of the companies information
+     */
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -37,7 +46,7 @@ public class GetInsuranceCompanyEndpoint {
                         data.getId(),
                         data.getInn(),
                         data.getOgrn(),
-                        data.getFullname(),
+                        data.getOrganizationName(),
                         data.getAddress()
                 ))
                 .collect(Collectors.toList()));

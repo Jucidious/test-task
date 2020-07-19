@@ -1,16 +1,19 @@
 package com.jucya.core.shared.data;
 
+/**
+ * Describes a company to be imported into DB.
+ */
 public class InsuranceCompanyNewData {
 
     private final Long inn;
     private final Long ogrn;
-    private final String fullname;
+    private final String organizationName;
     private final String address;
 
-    public InsuranceCompanyNewData(Long inn, Long ogrn, String fullname, String address) {
+    public InsuranceCompanyNewData(Long inn, Long ogrn, String organizationName, String address) {
         this.inn = inn;
         this.ogrn = ogrn;
-        this.fullname = fullname;
+        this.organizationName = organizationName;
         this.address = address;
     }
 
@@ -22,8 +25,8 @@ public class InsuranceCompanyNewData {
         return ogrn;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
     public String getAddress() {

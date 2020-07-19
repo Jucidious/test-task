@@ -5,6 +5,9 @@ import com.jucya.core.usecase.ImportNewInsuranceCompanyCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Configures company import components.
+ */
 @Configuration
 public class ImportConfig {
 
@@ -14,4 +17,5 @@ public class ImportConfig {
     ) {
         return new ImportNewInsuranceCompanyCaseImpl(insuranceCompanyRepository);
     }
+
 }

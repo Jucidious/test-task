@@ -1,9 +1,12 @@
 package com.jucya.core.shared.data;
 
+/**
+ * Describes a criteria for query.
+ */
 public enum CriteriaEnumData {
     INN("inn"),
     OGRN("ogrn"),
-    FULLNAME("fullname"),
+    ORGANIZATION_NAME("organizationName"),
     ADDRESS("address");
 
     private final String criteria;

@@ -1,6 +1,5 @@
 /**
- * The root application package.
- *
- * @since 0.1
+ * This package contains all features (use cases)
+ * supported by application.
  */
 package com.jucya.core.usecase;

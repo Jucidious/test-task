@@ -1,21 +1,24 @@
 package com.jucya.core.shared.data;
 
+/**
+ * Describes a company information.
+ */
 public class CompanyData {
     private final Long id;
     private final Long inn;
     private final Long ogrn;
-    private final String fullname;
+    private final String organizationName;
     private final String address;
 
-    public static CompanyData of(Long id, Long inn, Long ogrn, String fullname, String address) {
-        return  new CompanyData(id, inn, ogrn, fullname, address);
+    public static CompanyData of(Long id, Long inn, Long ogrn, String organizationName, String address) {
+        return  new CompanyData(id, inn, ogrn, organizationName, address);
     }
 
-    CompanyData(Long id, Long inn, Long ogrn, String fullname, String address) {
+    CompanyData(Long id, Long inn, Long ogrn, String organizationName, String address) {
         this.id = id;
         this.inn = inn;
         this.ogrn = ogrn;
-        this.fullname = fullname;
+        this.organizationName = organizationName;
         this.address = address;
     }
 
@@ -31,8 +34,8 @@ public class CompanyData {
         return ogrn;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
     public String getAddress() {

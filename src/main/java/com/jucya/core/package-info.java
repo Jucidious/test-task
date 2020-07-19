@@ -1,6 +1,4 @@
 /**
- * The root application package.
- *
- * @since 0.1
+ * This package contains application specific features.
  */
 package com.jucya.core;

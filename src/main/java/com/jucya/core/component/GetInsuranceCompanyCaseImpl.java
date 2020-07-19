@@ -1,5 +1,9 @@
 package com.jucya.core.component;
 
+import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
+
 import com.jucya.core.shared.data.CriteriaData;
 import com.jucya.core.shared.data.FoundCompaniesData;
 import com.jucya.core.shared.data.CompanyData;
@@ -8,11 +12,8 @@ import com.jucya.core.usecase.GetInsuranceCompanyCase;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
-import java.util.StringJoiner;
-import java.util.stream.Collectors;
 
-public class GetInsuranceCompanyCaseImpl implements GetInsuranceCompanyCase {
+class GetInsuranceCompanyCaseImpl implements GetInsuranceCompanyCase {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -27,7 +28,7 @@ public class GetInsuranceCompanyCaseImpl implements GetInsuranceCompanyCase {
         if (!request.isEmpty()) {
             for (CriteriaData oneCrit : request) {
                 var strValue = new StringBuilder();
-                if (oneCrit.getName().equals("fullname") || oneCrit.getName().equals("address")) {
+                if (oneCrit.getName().equals("organizationName") || oneCrit.getName().equals("address")) {
                     strValue.append("'").append(oneCrit.getValue()).append("'");
                     criteriaOne.add(oneCrit.getName() + "=" + strValue);
                 } else {
@@ -37,9 +38,8 @@ public class GetInsuranceCompanyCaseImpl implements GetInsuranceCompanyCase {
             searchCriteria.append(" where ").append(criteriaOne);
         }
         var criteriaStr = searchCriteria.toString();
-        var result = entityManager.createQuery(
-                criteriaStr, InsuranceCompany.class)
-                .getResultList();
+        var response = entityManager.createQuery(criteriaStr, InsuranceCompany.class);
+        var result = response.getResultList();
 
         if (result.isEmpty()) {
             return FoundCompaniesData.ofEmpty();
@@ -50,7 +50,7 @@ public class GetInsuranceCompanyCaseImpl implements GetInsuranceCompanyCase {
                                 company.getId(),
                                 company.getInn(),
                                 company.getOgrn(),
-                                company.getFullname(),
+                                company.getOrganizationName(),
                                 company.getAddress()))
                         .collect(Collectors.toList())
         );

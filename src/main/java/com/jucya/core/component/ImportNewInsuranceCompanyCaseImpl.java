@@ -5,11 +5,11 @@ import com.jucya.core.shared.domain.InsuranceCompany;
 import com.jucya.core.usecase.ImportNewInsuranceCompanyCase;
 import com.jucya.exception.CompanyDuplicateException;
 
-public class ImportNewInsuranceCompanyCaseImpl implements ImportNewInsuranceCompanyCase {
+class ImportNewInsuranceCompanyCaseImpl implements ImportNewInsuranceCompanyCase {
 
     private final InsuranceCompanyRepository insuranceCompanyRepository;
 
-    public ImportNewInsuranceCompanyCaseImpl(InsuranceCompanyRepository insuranceCompanyRepository) {
+    ImportNewInsuranceCompanyCaseImpl(InsuranceCompanyRepository insuranceCompanyRepository) {
         this.insuranceCompanyRepository = insuranceCompanyRepository;
     }
 
@@ -18,7 +18,7 @@ public class ImportNewInsuranceCompanyCaseImpl implements ImportNewInsuranceComp
         var inn = data.getInn();
         var ogrn = data.getOgrn();
         insuranceCompanyRepository.findByInnAndOgrn(inn, ogrn)
-                .ifPresentOrElse(result -> throwCompanyDuplicate(data.getFullname()),
+                .ifPresentOrElse(result -> throwCompanyDuplicate(result.getOrganizationName()),
                         () -> saveInsuranceCompany(data)
                 );
     }
@@ -27,12 +27,12 @@ public class ImportNewInsuranceCompanyCaseImpl implements ImportNewInsuranceComp
         var company = new InsuranceCompany();
         company.setInn(data.getInn());
         company.setOgrn(data.getOgrn());
-        company.setFullname(data.getFullname());
+        company.setOrganizationName(data.getOrganizationName());
         company.setAddress(data.getAddress());
         insuranceCompanyRepository.save(company);
     }
 
-    private void throwCompanyDuplicate(String fullname) {
-        throw new CompanyDuplicateException(fullname);
+    private void throwCompanyDuplicate(String organizationName) {
+        throw new CompanyDuplicateException(organizationName);
     }
 }

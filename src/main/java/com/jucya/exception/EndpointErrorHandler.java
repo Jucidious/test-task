@@ -1,11 +1,13 @@
-package com.jucya.api;
+package com.jucya.exception;
 
-import com.jucya.exception.CompanyDuplicateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * Handles application errors.
+ */
 @RestControllerAdvice
 class EndpointErrorHandler {
 
@@ -26,4 +28,5 @@ class EndpointErrorHandler {
             return errorMessage;
         }
     }
+
 }

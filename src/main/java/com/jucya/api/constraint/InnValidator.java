@@ -1,17 +1,13 @@
 package com.jucya.api.constraint;
 
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
 
 /**
  * Provides validation according to {@link com.jucya.api.constraint.Inn}.
- * Technically speaking, it ensures that both source and target lists contain
- * unique values.
  *
  * @see com.jucya.api.constraint.Inn
- * @since 0.1
  */
 public class InnValidator implements ConstraintValidator<Inn, Long> {
 
@@ -20,11 +16,11 @@ public class InnValidator implements ConstraintValidator<Inn, Long> {
     @Override
     public boolean isValid(Long inn, ConstraintValidatorContext context) {
         if (inn == null || inn < 0) {
-            return true;
+            return false;
         }
         var str = inn.toString();
         if (str.length() != 10) {
-            return true;
+            return false;
         }
         var arrInt = stringToIntArray(str);
         var result = getChecksum(arrInt);

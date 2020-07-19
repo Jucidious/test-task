@@ -5,7 +5,10 @@ import com.jucya.api.constraint.Ogrn;
 
 import javax.validation.constraints.NotBlank;
 
-
+/**
+ * Describes a companies to be checked
+ * against availability in DB.
+ */
 class InsuranceCompanyImportRequest {
 
     @Inn
@@ -15,7 +18,7 @@ class InsuranceCompanyImportRequest {
     private Long ogrn;
 
     @NotBlank
-    private String fullname;
+    private String organizationName;
 
     @NotBlank
     private String address;
@@ -23,10 +26,10 @@ class InsuranceCompanyImportRequest {
     private InsuranceCompanyImportRequest() {
     }
 
-    InsuranceCompanyImportRequest(Long inn, Long ogrn, String fullname, String address) {
+    InsuranceCompanyImportRequest(Long inn, Long ogrn, String organizationName, String address) {
         this.inn = inn;
         this.ogrn = ogrn;
-        this.fullname = fullname;
+        this.organizationName = organizationName;
         this.address = address;
     }
 
@@ -38,8 +41,8 @@ class InsuranceCompanyImportRequest {
         return ogrn;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
     public String getAddress() {

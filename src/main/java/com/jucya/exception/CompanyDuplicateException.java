@@ -1,5 +1,10 @@
 package com.jucya.exception;
 
+/**
+ * Thrown when the source inn and ogrn
+ * matches the source inn and ogrn
+ * to being already imported.
+ */
 public class CompanyDuplicateException extends RuntimeException {
 
     private final String companyName;

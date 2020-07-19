@@ -1,6 +1,5 @@
 /**
- * The root application package.
- *
- * @since 0.1
+ * This package contains data classes that are used
+ * between core components.
  */
 package com.jucya.core.shared.data;

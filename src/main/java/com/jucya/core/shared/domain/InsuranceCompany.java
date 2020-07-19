@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/**
+ * Local info about an imported company.
+ */
 @Entity
 public class InsuranceCompany{
 
@@ -17,7 +20,7 @@ public class InsuranceCompany{
     @Column
     private Long ogrn;
     @Column
-    private String fullname;
+    private String organizationName;
     @Column
     private String address;
 
@@ -62,12 +65,12 @@ public class InsuranceCompany{
         this.ogrn = ogrn;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
     public String getAddress() {
@@ -77,4 +80,5 @@ public class InsuranceCompany{
     public void setAddress(String address) {
         this.address = address;
     }
+
 }
