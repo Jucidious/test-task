@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: "jdbc:h2:/e:/java/projects/test-task/sql/app_db"
+    username: superuser
+    password: password
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2
