@@ -1,64 +1,85 @@
 package com.jucya.core.component;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.jucya.core.shared.data.CriteriaData;
 import com.jucya.core.shared.data.FoundCompaniesData;
-import com.jucya.core.shared.domain.InsuranceCompany;
+import com.jucya.core.shared.domain.Company;
 import com.jucya.core.usecase.GetInsuranceCompanyCase;
 
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.annotation.Resource;
 
 /**
  * Test suite for {@link com.jucya.core.component.GetInsuranceCompanyCaseImpl}.
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest
 @DisplayName("GetInsuranceCompanyCaseImpl")
 class GetInsuranceCompanyCaseImplTest {
 
-    private GetInsuranceCompanyCase getInsuranceCompanyCaseMock;
-    @Mock
-    private EntityManager entityManager;
+    private GetInsuranceCompanyCase getInsuranceCompanyCase;
+
+    @Resource
+    private InsuranceCompanyRepository insuranceCompanyRepository;
 
     @BeforeEach
     void setUp() {
-        entityManager = Mockito.mock(EntityManager.class);
-        getInsuranceCompanyCaseMock = new GetInsuranceCompanyCaseImpl();
+        getInsuranceCompanyCase = new GetInsuranceCompanyCaseImpl(insuranceCompanyRepository);
     }
 
     @Test
-    @DisplayName("successful when right variables")
-    void testSuccessful() {
+    @DisplayName("successful when right variables and result is empty")
+    void testSuccessfulWhenResultIsEmpty() {
         //given
-        var query = Mockito.mock(TypedQuery.class);
-        var response = new ArrayList<Object>();
-        var criteriaData = List.of(CriteriaData.of("inn", 1234L),
-                CriteriaData.of("address", "Tomsk"));
-        var resp = query.getResultList();
+        var criteriaData = List.of(CriteriaData.of("inn", 7702235133L),
+                CriteriaData.of("address", "Moscow"));
+
         //when
-
-//
-//        Mockito.when(entityManager.createQuery("")).thenReturn(query);
-//
-//        List<InsuranceCompany> expected = new ArrayList<>();
-//        Mockito.when(query.getResultList()).thenReturn(expected);
-
-
-
-        Mockito.when(entityManager.createQuery(Mockito.anyString(), Mockito.any())).thenReturn(query);
-        var result = getInsuranceCompanyCaseMock.execute(criteriaData);
+        var expectResult = getInsuranceCompanyCase.execute(criteriaData);
 
         //then
-        Assertions.assertThat(result).isInstanceOf(FoundCompaniesData.class);
-        Assertions.assertThat(result.getCompanies()).isEmpty();
+        Assertions.assertThat(expectResult).isInstanceOf(FoundCompaniesData.class);
+        Assertions.assertThat(expectResult.getCompanies()).isEmpty();
+    }
+
+    @Test
+    @DisplayName("successful when right variables and result is not empty")
+    void testSuccessfulWhenResultIsNotEmpty() {
+        //given
+        var criteriaData = List.of(CriteriaData.of("inn", 2460048358L),
+                CriteriaData.of("address", "Krasnoyarsk"));
+        var inn = 2460048358L;
+        var ogrn = 1022401785658L;
+        var organization = "SibUgol";
+        var address = "Krasnoyarsk";
+        var localCompany = new Company();
+        localCompany.setInn(inn);
+        localCompany.setOgrn(ogrn);
+        localCompany.setOrganization(organization);
+        localCompany.setAddress(address);
+
+        //when
+        insuranceCompanyRepository.save(localCompany);
+        var expectResult = getInsuranceCompanyCase.execute(criteriaData);
+
+        //then
+        Assertions.assertThat(expectResult).isInstanceOf(FoundCompaniesData.class);
+        Assertions.assertThat(expectResult.getCompanies().size()).isEqualTo(1);
+        Assertions.assertThat(expectResult.getCompanies().get(0).getInn()).isEqualTo(2460048358L);
+        Assertions.assertThat(expectResult.getCompanies().get(0).getOgrn()).isEqualTo(1022401785658L);
+        Assertions.assertThat(expectResult.getCompanies().get(0).getOrganization()).isEqualTo("SibUgol");
+        Assertions.assertThat(expectResult.getCompanies().get(0).getAddress()).isEqualTo("Krasnoyarsk");
     }
 
 }

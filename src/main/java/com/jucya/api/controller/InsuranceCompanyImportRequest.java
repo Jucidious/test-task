@@ -18,7 +18,7 @@ class InsuranceCompanyImportRequest {
     private Long ogrn;
 
     @NotBlank
-    private String organizationName;
+    private String organization;
 
     @NotBlank
     private String address;
@@ -26,10 +26,10 @@ class InsuranceCompanyImportRequest {
     private InsuranceCompanyImportRequest() {
     }
 
-    InsuranceCompanyImportRequest(Long inn, Long ogrn, String organizationName, String address) {
+    InsuranceCompanyImportRequest(Long inn, Long ogrn, String organization, String address) {
         this.inn = inn;
         this.ogrn = ogrn;
-        this.organizationName = organizationName;
+        this.organization = organization;
         this.address = address;
     }
 
@@ -41,8 +41,8 @@ class InsuranceCompanyImportRequest {
         return ogrn;
     }
 
-    public String getOrganizationName() {
-        return organizationName;
+    public String getOrganization() {
+        return organization;
     }
 
     public String getAddress() {

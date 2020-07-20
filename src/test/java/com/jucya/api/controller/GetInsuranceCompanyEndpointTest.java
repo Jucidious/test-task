@@ -22,8 +22,8 @@ import org.springframework.web.context.WebApplicationContext;
 /**
  * Test suite for {@link com.jucya.api.controller.GetInsuranceCompanyEndpoint}.
  */
-@DisplayName("GetInsuranceCompanyEndpoint")
 @WebMvcTest(controllers = GetInsuranceCompanyEndpoint.class)
+@DisplayName("GetInsuranceCompanyEndpoint")
 class GetInsuranceCompanyEndpointTest {
 
     @Autowired
@@ -33,7 +33,7 @@ class GetInsuranceCompanyEndpointTest {
     protected MockMvc mvc;
 
     @MockBean
-    private GetInsuranceCompanyCase getInsuranceCompanyCaseMock;
+    private GetInsuranceCompanyCase getInsuranceCompanyCase;
 
     @BeforeEach
     void before() {
@@ -49,7 +49,7 @@ class GetInsuranceCompanyEndpointTest {
         var result = FoundCompaniesData.ofEmpty();
 
         //when
-        Mockito.when(getInsuranceCompanyCaseMock.execute(Mockito.any())).thenReturn(result);
+        Mockito.when(getInsuranceCompanyCase.execute(Mockito.any())).thenReturn(result);
         var response = mvc.perform(MockMvcRequestBuilders.get("/search?inn=7707767220"));
 
         //then
@@ -64,12 +64,12 @@ class GetInsuranceCompanyEndpointTest {
         var id = 1L;
         var inn = 7707767220L;
         var ogrn = 5117746070019L;
-        var organizationName = "Apple";
+        var organization = "Apple";
         var address = "Tomsk";
-        var result = new FoundCompaniesData(List.of(CompanyData.of(id, inn, ogrn, organizationName, address)));
+        var result = new FoundCompaniesData(List.of(CompanyData.of(id, inn, ogrn, organization, address)));
 
         //when
-        Mockito.when(getInsuranceCompanyCaseMock.execute(Mockito.any())).thenReturn(result);
+        Mockito.when(getInsuranceCompanyCase.execute(Mockito.any())).thenReturn(result);
         var response = mvc.perform(MockMvcRequestBuilders.get("/search?inn=7707767220&violates=1234"));
 
         //then
@@ -77,7 +77,8 @@ class GetInsuranceCompanyEndpointTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.companies.[0].id").value(1L))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.companies.[0].inn").value(7707767220L))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.companies.[0].ogrn").value(5117746070019L))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.companies.[0].organizationName").value("Apple"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.companies.[0].organization").value("Apple"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.companies.[0].address").value("Tomsk"));
     }
+
 }

@@ -46,7 +46,7 @@ public class GetInsuranceCompanyEndpoint {
                         data.getId(),
                         data.getInn(),
                         data.getOgrn(),
-                        data.getOrganizationName(),
+                        data.getOrganization(),
                         data.getAddress()
                 ))
                 .collect(Collectors.toList()));
