@@ -7,13 +7,13 @@ public class InsuranceCompanyNewData {
 
     private final Long inn;
     private final Long ogrn;
-    private final String organizationName;
+    private final String organization;
     private final String address;
 
-    public InsuranceCompanyNewData(Long inn, Long ogrn, String organizationName, String address) {
+    public InsuranceCompanyNewData(Long inn, Long ogrn, String organization, String address) {
         this.inn = inn;
         this.ogrn = ogrn;
-        this.organizationName = organizationName;
+        this.organization = organization;
         this.address = address;
     }
 
@@ -25,8 +25,8 @@ public class InsuranceCompanyNewData {
         return ogrn;
     }
 
-    public String getOrganizationName() {
-        return organizationName;
+    public String getOrganization() {
+        return organization;
     }
 
     public String getAddress() {

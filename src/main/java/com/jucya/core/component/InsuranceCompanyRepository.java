@@ -1,25 +1,21 @@
 package com.jucya.core.component;
 
-import java.util.Optional;
+import java.util.List;
 
-import com.jucya.core.shared.domain.InsuranceCompany;
+import com.jucya.core.shared.domain.Company;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
  * Provides persistence access to the gets and imported companies.
  */
 @Repository
-interface InsuranceCompanyRepository extends JpaRepository<InsuranceCompany, Long> {
+interface InsuranceCompanyRepository extends JpaRepository<Company, Long>,
+        JpaSpecificationExecutor<Company> {
 
-    /**
-     * Finds the companies by their inn and ogrn, if any.
-     *
-     * @param inn  organization inn
-     * @param ogrn organization ogrn
-     * @return found companies
-     */
-    Optional<InsuranceCompany> findByInnAndOgrn(Long inn, Long ogrn);
+    List<Company> findAll(Specification spec);
 
 }

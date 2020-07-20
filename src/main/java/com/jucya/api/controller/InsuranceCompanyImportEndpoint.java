@@ -36,7 +36,7 @@ public class InsuranceCompanyImportEndpoint {
                 new InsuranceCompanyNewData(
                         request.getInn(),
                         request.getOgrn(),
-                        request.getOrganizationName(),
+                        request.getOrganization(),
                         request.getAddress()
                 )
         );

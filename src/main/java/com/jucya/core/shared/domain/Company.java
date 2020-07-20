@@ -10,7 +10,7 @@ import java.util.Objects;
  * Local info about an imported company.
  */
 @Entity
-public class InsuranceCompany{
+public class Company {
 
     @Id
     @GeneratedValue
@@ -20,7 +20,7 @@ public class InsuranceCompany{
     @Column
     private Long ogrn;
     @Column
-    private String organizationName;
+    private String organization;
     @Column
     private String address;
 
@@ -32,7 +32,7 @@ public class InsuranceCompany{
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        InsuranceCompany company = (InsuranceCompany) o;
+        Company company = (Company) o;
         return id.equals(company.id);
     }
 
@@ -65,12 +65,12 @@ public class InsuranceCompany{
         this.ogrn = ogrn;
     }
 
-    public String getOrganizationName() {
-        return organizationName;
+    public String getOrganization() {
+        return organization;
     }
 
-    public void setOrganizationName(String organizationName) {
-        this.organizationName = organizationName;
+    public void setOrganization(String organization) {
+        this.organization = organization;
     }
 
     public String getAddress() {

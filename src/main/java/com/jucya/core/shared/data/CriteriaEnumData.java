@@ -6,7 +6,7 @@ package com.jucya.core.shared.data;
 public enum CriteriaEnumData {
     INN("inn"),
     OGRN("ogrn"),
-    ORGANIZATION_NAME("organizationName"),
+    ORGANIZATION("organization"),
     ADDRESS("address");
 
     private final String criteria;
@@ -27,4 +27,5 @@ public enum CriteriaEnumData {
     public String getCriteria() {
         return criteria;
     }
+
 }

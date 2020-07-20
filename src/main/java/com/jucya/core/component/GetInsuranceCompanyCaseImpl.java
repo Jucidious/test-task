@@ -1,45 +1,39 @@
 package com.jucya.core.component;
 
 import java.util.List;
-import java.util.StringJoiner;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.jucya.core.shared.data.CriteriaData;
 import com.jucya.core.shared.data.FoundCompaniesData;
 import com.jucya.core.shared.data.CompanyData;
-import com.jucya.core.shared.domain.InsuranceCompany;
 import com.jucya.core.usecase.GetInsuranceCompanyCase;
+import com.jucya.extention.SpecificationJPA;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 
+@Component
 class GetInsuranceCompanyCaseImpl implements GetInsuranceCompanyCase {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final InsuranceCompanyRepository insuranceCompanyRepository;
+
+    GetInsuranceCompanyCaseImpl(InsuranceCompanyRepository insuranceCompanyRepository) {
+        this.insuranceCompanyRepository = insuranceCompanyRepository;
+    }
 
     @Override
     public FoundCompaniesData execute(List<CriteriaData> request) {
-        var fields = "fields";
-        var table = "InsuranceCompany";
-        var criteriaOne = new StringJoiner(" AND ", " ", " ");
-        var searchCriteria = new StringBuilder().append("select ").append(fields)
-                .append(" from ").append(table).append(" ").append(fields);
-        if (!request.isEmpty()) {
-            for (CriteriaData oneCrit : request) {
-                var strValue = new StringBuilder();
-                if (oneCrit.getName().equals("organizationName") || oneCrit.getName().equals("address")) {
-                    strValue.append("'").append(oneCrit.getValue()).append("'");
-                    criteriaOne.add(oneCrit.getName() + "=" + strValue);
-                } else {
-                    criteriaOne.add(oneCrit.getName() + "=" + oneCrit.getValue());
-                }
-            }
-            searchCriteria.append(" where ").append(criteriaOne);
-        }
-        var criteriaStr = searchCriteria.toString();
-        var response = entityManager.createQuery(criteriaStr, InsuranceCompany.class);
-        var result = response.getResultList();
+        var mapCriteria = toMapCriteria(request);
+        var inn = mapCriteria.get("inn");
+        var ogrn = mapCriteria.get("ogrn");
+        var organization = mapCriteria.get("organizationName");
+        var address = mapCriteria.get("address");
+        var result = insuranceCompanyRepository.findAll(Specification
+                .where(SpecificationJPA.withInn(inn))
+                .and(SpecificationJPA.withOgrn(ogrn))
+                .and(SpecificationJPA.withOrganization(organization))
+                .and(SpecificationJPA.withAddress(address)));
 
         if (result.isEmpty()) {
             return FoundCompaniesData.ofEmpty();
@@ -50,11 +44,16 @@ class GetInsuranceCompanyCaseImpl implements GetInsuranceCompanyCase {
                                 company.getId(),
                                 company.getInn(),
                                 company.getOgrn(),
-                                company.getOrganizationName(),
+                                company.getOrganization(),
                                 company.getAddress()))
                         .collect(Collectors.toList())
         );
 
+    }
+
+    private Map<String, Object> toMapCriteria(List<CriteriaData> request) {
+        return request.stream()
+                .collect(Collectors.toMap(CriteriaData::getName, CriteriaData::getValue));
     }
 
 }

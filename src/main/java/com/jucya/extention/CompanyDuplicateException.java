@@ -1,4 +1,4 @@
-package com.jucya.exception;
+package com.jucya.extention;
 
 /**
  * Thrown when the source inn and ogrn

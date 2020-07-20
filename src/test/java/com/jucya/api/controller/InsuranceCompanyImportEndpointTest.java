@@ -49,7 +49,7 @@ class InsuranceCompanyImportEndpointTest {
                 .content("{\n"
                         + "    \"inn\": \"7707767220\",\n"
                         + "    \"ogrn\": \"5117746070019\",\n"
-                        + "    \"organizationName\": \"\",\n"
+                        + "    \"organization\": \"\",\n"
                         + "    \"address\": \"Tomsk\"\n"
                         + "}"));
 
@@ -86,7 +86,7 @@ class InsuranceCompanyImportEndpointTest {
                 .content("{\n"
                         + "    \"inn\": \"7707767220\",\n"
                         + "    \"ogrn\": \"5117746070019\",\n"
-                        + "    \"organizationName\": \"Apple\",\n"
+                        + "    \"organization\": \"Apple\",\n"
                         + "    \"address\": \"\"\n"
                         + "}"));
 
@@ -105,7 +105,7 @@ class InsuranceCompanyImportEndpointTest {
                 .content("{\n"
                         + "    \"inn\": \"7707767220\",\n"
                         + "    \"ogrn\": \"5117746070019\",\n"
-                        + "    \"organizationName\": \"Apple\"\n"
+                        + "    \"organization\": \"Apple\"\n"
                         + "}"));
 
         //then
@@ -123,7 +123,7 @@ class InsuranceCompanyImportEndpointTest {
                 .content("{\n"
                         + "    \"inn\": \"7707767225\",\n"
                         + "    \"ogrn\": \"5117746070019\",\n"
-                        + "    \"organizationName\": \"Apple\",\n"
+                        + "    \"organization\": \"Apple\",\n"
                         + "    \"address\": \"Tomsk\"\n"
                         + "}"));
 
@@ -142,7 +142,7 @@ class InsuranceCompanyImportEndpointTest {
                 .content("{\n"
                         + "    \"inn\": \"\",\n"
                         + "    \"ogrn\": \"5117746070019\",\n"
-                        + "    \"organizationName\": \"Apple\",\n"
+                        + "    \"organization\": \"Apple\",\n"
                         + "    \"address\": \"Tomsk\"\n"
                         + "}"));
 
@@ -160,7 +160,7 @@ class InsuranceCompanyImportEndpointTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n"
                         + "    \"ogrn\": \"5117746070019\",\n"
-                        + "    \"organizationName\": \"Apple\",\n"
+                        + "    \"organization\": \"Apple\",\n"
                         + "    \"address\": \"Tomsk\"\n"
                         + "}"));
 
@@ -179,7 +179,7 @@ class InsuranceCompanyImportEndpointTest {
                 .content("{\n"
                         + "    \"inn\": \"7707767220\",\n"
                         + "    \"ogrn\": \"5117746070013\",\n"
-                        + "    \"organizationName\": \"Apple\",\n"
+                        + "    \"organization\": \"Apple\",\n"
                         + "    \"address\": \"Tomsk\"\n"
                         + "}"));
 
@@ -198,7 +198,7 @@ class InsuranceCompanyImportEndpointTest {
                 .content("{\n"
                         + "    \"inn\": \"7707767220\",\n"
                         + "    \"ogrn\": \"\",\n"
-                        + "    \"organizationName\": \"Apple\",\n"
+                        + "    \"organization\": \"Apple\",\n"
                         + "    \"address\": \"Tomsk\"\n"
                         + "}"));
 
@@ -216,7 +216,7 @@ class InsuranceCompanyImportEndpointTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n"
                         + "    \"inn\": \"7707767220\",\n"
-                        + "    \"organizationName\": \"Apple\",\n"
+                        + "    \"organization\": \"Apple\",\n"
                         + "    \"address\": \"Tomsk\"\n"
                         + "}"));
 
@@ -235,7 +235,7 @@ class InsuranceCompanyImportEndpointTest {
                 .content("{\n"
                         + "    \"inn\": \"7707767220\",\n"
                         + "    \"ogrn\": \"5117746070019\",\n"
-                        + "    \"organizationName\": \"Apple\",\n"
+                        + "    \"organization\": \"Apple\",\n"
                         + "    \"address\": \"Tomsk\"\n"
                         + "}"));
 
