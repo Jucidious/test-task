@@ -24,7 +24,7 @@ public @interface Inn {
      *
      * @return message template.
      */
-    String message() default "{com.jucya.api.constraint.Inn.message}";
+    String message() default "Некорректно введён ИНН";
 
     /**
      * Active validation groups.
