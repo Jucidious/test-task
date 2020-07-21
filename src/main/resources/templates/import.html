@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Добавление организации</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -11,8 +11,8 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="./">Панель навигации</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <a class="navbar-brand text-white" href="./">Панель навигации</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,41 +22,52 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link disabled" href="/importForm">Добавить организацию</a>
+                <a class="nav-link disabled text-white" href="/importForm">Добавить организацию</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/searchForm">Поиск организации</a>
+                <a class="nav-link text-white" href="/searchForm">Поиск организации</a>
             </li>
 
         </ul>
 
     </div>
 </nav>
-
+<div th:switch="${result}">
+<div class="alert alert-info" th:case="'success'">
+    <strong> Страховая организация успешно добавлена в справочник!</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+</div>
+<div class="alert alert-danger" th:case="'exists'">
+    <strong> Извините, но организация с такими данными уже существует.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+</div>
+</div>
 <div class="container mt-2">
     <h2>Введите данные об организации:</h2>
-<form action="#" th:action="@{/import}" th:object="${request}" method="post">
+<form class="needs-validation" action="#" th:action="@{/import}" th:object="${request}" method="post" novalidate>
+
     <div class="form-group">
-        <input type="number" class="form-control" th:field="*{inn}" id="inn" aria-describedby="innHelp" placeholder="Введите ИНН" >
+        <input type="number" class="form-control" th:field="*{inn}" id="inn" aria-describedby="innHelp" placeholder="Введите ИНН" required>
         <small id="innHelp" class="form-text text-muted">ИНН должно состоять из 10 знаков.</small>
-        <div th:each="err : ${#fields.errors('inn')}" th:text="${err}"></div>
+        <p class="text-danger" th:each="err : ${#fields.errors('inn')}" th:text="${err}"></p>
 
     </div>
     <div class="form-group">
-        <input type="number" class="form-control" th:field="*{ogrn}" id="ogrn" aria-describedby="ogrnHelp" placeholder="Введите ОГРН" >
+        <input type="number" class="form-control" th:field="*{ogrn}" id="ogrn" aria-describedby="ogrnHelp" placeholder="Введите ОГРН" required>
+        <p class="text-danger" th:each="err : ${#fields.errors('ogrn')}" th:text="${err}"></p>
         <small id="ogrnHelp" class="form-text text-muted">ОГРН должно состоять из 13 знаков.</small>
-        <div th:each="err : ${#fields.errors('ogrn')}" th:text="${err}"></div>
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" th:field="*{organization}" id="organization" placeholder="Введите название организации" >
-        <div th:each="err : ${#fields.errors('organization')}" th:text="${err}"></div>
+        <input type="text" class="form-control" th:field="*{organization}" id="organization" placeholder="Введите название организации" required>
+        <p class="text-danger" th:each="err : ${#fields.errors('organization')}" th:text="${err}"></p>
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" th:field="*{address}" id="address" placeholder="Введите адрес организации" >
-        <div th:each="err : ${#fields.errors('address')}" th:text="${err}"></div>
+        <input type="text" class="form-control" th:field="*{address}" id="address" placeholder="Введите адрес организации" required>
+        <p class="text-danger" th:each="err : ${#fields.errors('address')}" th:text="${err}"></p>
     </div>
 
-    <button type="submit" class="btn btn-primary">Добавить</button>
+    <button type="submit" class="btn btn-primary" >Добавить</button>
+<!--    <input type="reset" class="form-group ml-3"></input>-->
 </form>
 </div>
 

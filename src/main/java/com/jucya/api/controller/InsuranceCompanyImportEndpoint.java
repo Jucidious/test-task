@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -35,11 +34,12 @@ public class InsuranceCompanyImportEndpoint {
 
     @RequestMapping(value="/import", method= RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public String importCompany(@Valid @ModelAttribute("request") InsuranceCompanyImportRequest request, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String importCompany(@Valid @ModelAttribute("request") InsuranceCompanyImportRequest request,
+                                BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "import";
         }
-        importNewInsuranceCompanyCase.execute(
+        var result = importNewInsuranceCompanyCase.execute(
                 new InsuranceCompanyNewData(
                         request.getInn(),
                         request.getOgrn(),
@@ -47,7 +47,9 @@ public class InsuranceCompanyImportEndpoint {
                         request.getAddress()
                 )
         );
-        return "main";
+        model.addAttribute("result", result);
+        model.addAttribute("request", new InsuranceCompanyImportRequest());
+        return "import";
     }
 
 }

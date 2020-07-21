@@ -11,7 +11,7 @@ public class CompanyData {
     private final String address;
 
     public static CompanyData of(Long id, Long inn, Long ogrn, String organization, String address) {
-        return  new CompanyData(id, inn, ogrn, organization, address);
+        return new CompanyData(id, inn, ogrn, organization, address);
     }
 
     CompanyData(Long id, Long inn, Long ogrn, String organization, String address) {

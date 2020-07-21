@@ -8,40 +8,35 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="./">Панель навигации</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <a class="navbar-brand text-white" href="./">Панель навигации</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-
             <li class="nav-item">
-                <a class="nav-link" href="/importForm">Добавить организацию</a>
+                <a class="nav-link text-white" href="/importForm">Добавить организацию</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/searchForm">Поиск организации</a>
+                <a class="nav-link text-white" href="/searchForm">Поиск организации</a>
             </li>
-
         </ul>
-
     </div>
 </nav>
 
-
-
 <div class="container mt-2">
     <h2>Результаты поиска:</h2>
-
-    <table class="table table-striped">
+    <div class="alert alert-secondary" role="alert" th:if="${response.getCompanies().isEmpty()}">
+        По вашему запросу ничего не найдено
+    </div>
+    <table class="table table-striped" th:if="${!response.getCompanies().isEmpty()}">
         <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">id</th>
             <th scope="col">ИНН</th>
             <th scope="col">ОГРН</th>
             <th scope="col">Организация</th>
@@ -49,7 +44,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr  th:each="response: ${response.getCompanies()}">
+        <tr th:each="response: ${response.getCompanies()}">
             <th scope="row" th:text="${response.getId()}"></th>
             <td th:text="${response.getInn()}"></td>
             <td th:text="${response.getOgrn()}"></td>

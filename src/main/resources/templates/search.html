@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -12,8 +11,8 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="./">Панель навигации</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <a class="navbar-brand text-white" href="./">Панель навигации</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -23,10 +22,10 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="/importForm">Добавить организацию</a>
+                <a class="nav-link text-white" href="/importForm">Добавить организацию</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="/searchForm">Поиск организации</a>
+                <a class="nav-link disabled text-white" href="/searchForm">Поиск организации</a>
             </li>
 
         </ul>
@@ -39,22 +38,21 @@
 
     <form action="#" th:action="@{/search}" th:object="${request}" method="get">
         <div class="form-group">
-            <!--        <label for="inn">ИНН</label>-->
-            <input type="number" class="form-control" name="inn" id="inn" aria-describedby="innHelp" placeholder="Введите ИНН" >
+            <input type="number" class="form-control" name="inn" id="inn" aria-describedby="innHelp"
+                   placeholder="Введите ИНН">
             <small id="innHelp" class="form-text text-muted">ИНН должно состоять из 10 знаков.</small>
         </div>
         <div class="form-group">
-            <!--        <label for="ogrn">ОГРН</label>-->
-            <input type="number" class="form-control" name="ogrn" id="ogrn" aria-describedby="ogrnHelp" placeholder="Введите ОГРН" >
+            <input type="number" class="form-control" name="ogrn" id="ogrn" aria-describedby="ogrnHelp"
+                   placeholder="Введите ОГРН">
             <small id="ogrnHelp" class="form-text text-muted">ОГРН должно состоять из 13 знаков.</small>
         </div>
         <div class="form-group">
-            <!--        <label for="organization">Название организации</label>-->
-            <input type="text" class="form-control" name="organization" id="organization" placeholder="Введите название организации" >
+            <input type="text" class="form-control" name="organization" id="organization"
+                   placeholder="Введите название организации">
         </div>
         <div class="form-group">
-            <!--        <label for="address">Юридический адрес</label>-->
-            <input type="text" class="form-control" name="address" id="address" placeholder="Введите адрес организации" >
+            <input type="text" class="form-control" name="address" id="address" placeholder="Введите адрес организации">
         </div>
         <button type="submit" class="btn btn-primary">Искать</button>
     </form>

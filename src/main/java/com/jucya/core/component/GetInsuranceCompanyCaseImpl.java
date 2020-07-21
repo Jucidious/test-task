@@ -8,11 +8,14 @@ import com.jucya.core.shared.data.CriteriaData;
 import com.jucya.core.shared.data.FoundCompaniesData;
 import com.jucya.core.shared.data.CompanyData;
 import com.jucya.core.usecase.GetInsuranceCompanyCase;
-import com.jucya.extention.SpecificationJPA;
+import com.jucya.extension.SpecificationJPA;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
+/**
+ * Provides an implementation to get company.
+ */
 @Component
 class GetInsuranceCompanyCaseImpl implements GetInsuranceCompanyCase {
 

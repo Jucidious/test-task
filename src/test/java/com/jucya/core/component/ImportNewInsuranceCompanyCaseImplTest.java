@@ -1,13 +1,10 @@
 package com.jucya.core.component;
 
-import java.util.ArrayList;
-
 import com.jucya.core.shared.data.InsuranceCompanyNewData;
 import com.jucya.core.shared.domain.Company;
 import com.jucya.core.usecase.ImportNewInsuranceCompanyCase;
-import com.jucya.extention.CompanyDuplicateException;
 
-import com.jucya.extention.SpecificationJPA;
+import com.jucya.extension.SpecificationJPA;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,8 +35,8 @@ class ImportNewInsuranceCompanyCaseImplTest {
     }
 
     @Test
-    @DisplayName("raises 'CompanyDuplicateException' when the company is already exists")
-    void testFailedDuplicateCompany() {
+    @DisplayName("when the company is already exists")
+    void testWhenCompanyExists() {
         //given
         var inn = 7707767220L;
         var ogrn = 5117746070019L;
@@ -54,11 +51,10 @@ class ImportNewInsuranceCompanyCaseImplTest {
 
         //when
         insuranceCompanyRepository.save(localCompany);
-        var thrown = Assertions.catchThrowable(() -> importNewInsuranceCompanyCase.execute(data));
+        var result = importNewInsuranceCompanyCase.execute(data);
 
         //then
-        Assertions.assertThat(thrown).isInstanceOf(CompanyDuplicateException.class);
-        Assertions.assertThat(thrown.getMessage()).isEqualTo("This \"Apple\" company already exists");
+        Assertions.assertThat(result).isEqualTo("exists");
     }
 
     @Test
@@ -72,16 +68,17 @@ class ImportNewInsuranceCompanyCaseImplTest {
         var data = new InsuranceCompanyNewData(inn, ogrn, organization, address);
 
         //when
-        importNewInsuranceCompanyCase.execute(data);
-        var result = insuranceCompanyRepository.findAll(Specification
+        var result = importNewInsuranceCompanyCase.execute(data);
+        var response = insuranceCompanyRepository.findAll(Specification
                 .where(SpecificationJPA.withOgrn(ogrn)));
 
         //then
-        Assertions.assertThat(result.size()).isEqualTo(1);
-        Assertions.assertThat(result.get(0).getInn()).isEqualTo(7707767220L);
-        Assertions.assertThat(result.get(0).getOgrn()).isEqualTo(5117746070017L);
-        Assertions.assertThat(result.get(0).getOrganization()).isEqualTo("Apple");
-        Assertions.assertThat(result.get(0).getAddress()).isEqualTo("Tomsk");
+        Assertions.assertThat(response.size()).isEqualTo(1);
+        Assertions.assertThat(response.get(0).getInn()).isEqualTo(7707767220L);
+        Assertions.assertThat(response.get(0).getOgrn()).isEqualTo(5117746070017L);
+        Assertions.assertThat(response.get(0).getOrganization()).isEqualTo("Apple");
+        Assertions.assertThat(response.get(0).getAddress()).isEqualTo("Tomsk");
+        Assertions.assertThat(result).isEqualTo("success");
     }
 
 }

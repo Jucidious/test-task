@@ -3,12 +3,14 @@ package com.jucya.core.component;
 import com.jucya.core.shared.data.InsuranceCompanyNewData;
 import com.jucya.core.shared.domain.Company;
 import com.jucya.core.usecase.ImportNewInsuranceCompanyCase;
-import com.jucya.extention.CompanyDuplicateException;
-import com.jucya.extention.SpecificationJPA;
+import com.jucya.extension.SpecificationJPA;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
+/**
+ * Provides an implementation to import company.
+ */
 @Component
 class ImportNewInsuranceCompanyCaseImpl implements ImportNewInsuranceCompanyCase {
 
@@ -19,7 +21,7 @@ class ImportNewInsuranceCompanyCaseImpl implements ImportNewInsuranceCompanyCase
     }
 
     @Override
-    public void execute(InsuranceCompanyNewData data) {
+    public String execute(InsuranceCompanyNewData data) {
         var inn = data.getInn();
         var ogrn = data.getOgrn();
         var organization = data.getOrganization();
@@ -29,12 +31,11 @@ class ImportNewInsuranceCompanyCaseImpl implements ImportNewInsuranceCompanyCase
                 .and(SpecificationJPA.withOgrn(ogrn))
                 .and(SpecificationJPA.withOrganization(organization))
                 .and(SpecificationJPA.withAddress(address)));
-        if (result.isEmpty()){
-            saveInsuranceCompany(data);
-        } else {
-            throwCompanyDuplicate(organization);
+        if (!result.isEmpty()) {
+            return "exists";
         }
-
+        saveInsuranceCompany(data);
+        return "success";
     }
 
     private void saveInsuranceCompany(InsuranceCompanyNewData data) {
@@ -46,8 +47,9 @@ class ImportNewInsuranceCompanyCaseImpl implements ImportNewInsuranceCompanyCase
         insuranceCompanyRepository.save(company);
     }
 
-    private void throwCompanyDuplicate(String organization) {
-        throw new CompanyDuplicateException(organization);
-    }
+//    private void throwCompanyDuplicate(String organization) {
+//
+//        throw new CompanyDuplicateException(organization);
+//    }
 
 }

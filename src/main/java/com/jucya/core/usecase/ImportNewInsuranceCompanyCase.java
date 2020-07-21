@@ -12,5 +12,6 @@ public interface ImportNewInsuranceCompanyCase {
      *
      * @param data company properties to be imported
      */
-    void execute(InsuranceCompanyNewData data);
+    String execute(InsuranceCompanyNewData data);
+
 }

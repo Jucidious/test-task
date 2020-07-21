@@ -1,6 +1,5 @@
 package com.jucya.core.component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.jucya.core.shared.data.CriteriaData;
@@ -9,8 +8,6 @@ import com.jucya.core.shared.domain.Company;
 import com.jucya.core.usecase.GetInsuranceCompanyCase;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

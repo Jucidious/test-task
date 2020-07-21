@@ -1,7 +1,10 @@
-package com.jucya.extention;
+package com.jucya.extension;
 
 import com.jucya.core.shared.domain.Company;
 
+/**
+ * Provides different specification for create query.
+ */
 public class SpecificationJPA {
 
     public static org.springframework.data.jpa.domain.Specification<Company> withInn(Object inn) {
