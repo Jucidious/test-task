@@ -4,6 +4,7 @@ import com.jucya.api.constraint.Inn;
 import com.jucya.api.constraint.Ogrn;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  * Describes a companies to be checked
@@ -18,9 +19,11 @@ class InsuranceCompanyImportRequest {
     private Long ogrn;
 
     @NotBlank
+    @Size(max = 500)
     private String organization;
 
     @NotBlank
+    @Size(max = 1000)
     private String address;
 
     InsuranceCompanyImportRequest() {
