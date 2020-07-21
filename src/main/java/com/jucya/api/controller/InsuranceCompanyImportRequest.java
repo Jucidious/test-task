@@ -19,11 +19,11 @@ class InsuranceCompanyImportRequest {
     private Long ogrn;
 
     @NotBlank
-    @Size(max = 500)
+    @Size(max = 255)
     private String organization;
 
     @NotBlank
-    @Size(max = 500)
+    @Size(max = 255)
     private String address;
 
     InsuranceCompanyImportRequest() {
