@@ -24,7 +24,7 @@ public @interface Ogrn {
      *
      * @return message template.
      */
-    String message() default "{com.jucya.api.constraint.Ogrn.message}";
+    String message() default "Некорректно введён ОГРН";
 
     /**
      * Active validation groups.

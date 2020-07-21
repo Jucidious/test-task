@@ -23,7 +23,7 @@ class InsuranceCompanyImportRequest {
     @NotBlank
     private String address;
 
-    private InsuranceCompanyImportRequest() {
+    InsuranceCompanyImportRequest() {
     }
 
     InsuranceCompanyImportRequest(Long inn, Long ogrn, String organization, String address) {
@@ -49,4 +49,19 @@ class InsuranceCompanyImportRequest {
         return address;
     }
 
+    public void setInn(Long inn) {
+        this.inn = inn;
+    }
+
+    public void setOgrn(Long ogrn) {
+        this.ogrn = ogrn;
+    }
+
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
