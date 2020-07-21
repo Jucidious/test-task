@@ -23,7 +23,7 @@ class InsuranceCompanyImportRequest {
     private String organization;
 
     @NotBlank
-    @Size(max = 1000)
+    @Size(max = 500)
     private String address;
 
     InsuranceCompanyImportRequest() {
