@@ -3,8 +3,9 @@ package com.jucya.core.component;
 import com.jucya.core.shared.data.InsuranceCompanyNewData;
 import com.jucya.core.shared.domain.Company;
 import com.jucya.core.usecase.ImportNewInsuranceCompanyCase;
-
 import com.jucya.extension.SpecificationJPA;
+
+import javax.annotation.Resource;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,8 +14,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.annotation.Resource;
 
 /**
  * Test suite for {@link com.jucya.core.component.ImportNewInsuranceCompanyCaseImpl}.

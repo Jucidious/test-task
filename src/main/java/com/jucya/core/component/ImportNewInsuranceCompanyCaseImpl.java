@@ -47,9 +47,4 @@ class ImportNewInsuranceCompanyCaseImpl implements ImportNewInsuranceCompanyCase
         insuranceCompanyRepository.save(company);
     }
 
-//    private void throwCompanyDuplicate(String organization) {
-//
-//        throw new CompanyDuplicateException(organization);
-//    }
-
 }
